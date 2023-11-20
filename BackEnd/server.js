@@ -35,12 +35,12 @@ const bookSchema = new mongoose.Schema({
   cover:String,
   author:String
 });
-
+// Define a Mongoose model based on the book schema//
 const bookModel = mongoose.model('books',bookSchema);
 
 app.post('/api/book', (req,res)=>{
     console.log(req.body);
-
+ // Create a new book instance using the Book model//
        bookModel.create({
         title:req.body.title,
         cover:req.body.cover,
@@ -53,13 +53,13 @@ app.post('/api/book', (req,res)=>{
       ()=>{res.send("Data NOT Recieved!")}
     )
 })
-
+// Route handling for the root endpoint //
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-
+// Route handling for the '/api/books' endpoint to retrieve all books //
 app.get('/api/books', async (req, res)=>{
-
+// Respond with a JSON representation of the retrieved books //
   let books = await bookModel.find({});
   console.log(books)
   res.json(books);
@@ -110,7 +110,8 @@ const data = [
     ];
 
  
-
+// Start the server and make it listen on the specified port //
+// Log a message to the console indicating that the server is running and listening on the specified port //
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
